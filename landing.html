@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <style>
+      body {
+        background-color: aquamarine;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+      }
+
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+      }
+
+      header nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header nav h1 {
+        margin: 0;
+      }
+
+      header nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      header nav ul li {
+        margin-left: 20px;
+      }
+
+      header nav ul li a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .top {
+        background: url("officePic.webp") no-repeat center center/cover;
+        color: #fff;
+        text-align: center;
+        padding: 100px 20px;
+      }
+
+      .top h2 {
+        font-size: 3rem;
+      }
+
+      .top p {
+        font-size: 1.2rem;
+        margin: 20px 0;
+      }
+
+      .top .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      section {
+        padding: 60px 20px;
+        text-align: center;
+      }
+
+      section#services {
+        background-color: #f4f4f4;
+      }
+
+      .service-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .service {
+        flex-basis: 30%;
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .service-container {
+        width: 80%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .service {
+        background-color: #1d7a9181;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        flex: 1 1 250px;
+        transition: transform 0.3s ease;
+      }
+
+      .service:hover {
+        transform: translateY(-10px);
+      }
+
+      .service h3 {
+        margin-top: 0;
+        color: #0c476f;
+        font-size: 24px;
+      }
+
+      .service p {
+        color: #77108e;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>Nipu's Landing Page</h1>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="top">
+      <h2>Welcome to My Landing Page</h2>
+      <p>Discover amazing content and connect with us.</p>
+      <a href="#about" class="btn">Learn More</a>
+    </section>
+
+    <section id="about">
+      <h2>About Us</h2>
+      <p>
+        Welcome to Nipu's Company, where innovation meets excellence. Founded in
+        2024, providing top-notch services
+        to our clients across the globe. Our mission is to deliver exceptional
+        value and exceed our customers expectations by combining creativity,
+        technology, and expertise.
+      </p>
+    </section>
+
+    <section id="services">
+      <h2>Our Services</h2>
+      <div class="service-container">
+        <div class="service">
+          <h3>Web Development</h3>
+          <p>Creating attractive and functional websites.</p>
+        </div>
+        <div class="service">
+          <h3>Design</h3>
+          <p>Crafting visually appealing designs.</p>
+        </div>
+        <div class="service">
+          <h3>SEO</h3>
+          <p>Improving your site's visibility in search engines .</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Feel free to reach out to us with any inquiries.</p>
+
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Nipu's Company. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
