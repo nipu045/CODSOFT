@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+    
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #90f7ec, #32ccbc);
+}
+
+.calculator {
+    width: 320px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.display {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 2.5rem;
+    text-align: right;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+
+.btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 20px;
+    font-size: 1.5rem;
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(2px);
+}
+
+.operator {
+    background: linear-gradient(135deg, #f45c43, #eb3349);
+    color: #fff;
+}
+
+.operator:hover {
+    background: linear-gradient(135deg, #eb3349, #f45c43);
+}
+
+#equals {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #0575e6, #00f260);
+    color: #fff;
+    font-weight: bold;
+}
+
+#equals:hover {
+    background: linear-gradient(135deg, #00f260, #0575e6);
+}
+
+#clear {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+    font-weight: bold;
+}
+
+#clear:hover {
+    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+}
+
+@media (max-width: 400px) {
+    .calculator {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .display {
+        font-size: 2rem;
+        padding: 15px;
+    }
+
+    .btn {
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div id="display" class="display">0</div>
+        <div class="buttons">
+            <button class="btn" data-value="7">7</button>
+            <button class="btn" data-value="8">8</button>
+            <button class="btn" data-value="9">9</button>
+            <button class="btn operator" data-value="/">/</button>
+            <button class="btn" data-value="4">4</button>
+            <button class="btn" data-value="5">5</button>
+            <button class="btn" data-value="6">6</button>
+            <button class="btn operator" data-value="*">*</button>
+            <button class="btn" data-value="1">1</button>
+            <button class="btn" data-value="2">2</button>
+            <button class="btn" data-value="3">3</button>
+            <button class="btn operator" data-value="-">-</button>
+            <button class="btn" data-value="0">0</button>
+            <button class="btn" data-value=".">.</button>
+            <button class="btn" id="clear">C</button>
+            <button class="btn operator" data-value="+">+</button>
+            <button class="btn operator" id="equals" data-value="=">=</button>
+        </div>
+    </div>
+    <script >
+    	const display = document.getElementById('display');
+const buttons = document.querySelectorAll('.btn');
+let currentInput = '';
+let operator = '';
+let firstOperand = '';
+let shouldResetDisplay = false;
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        const value = button.getAttribute('data-value');
+
+        if (value === 'C') {
+            resetCalculator();
+        } else if (value === '=') {
+            if (operator && firstOperand !== '' && currentInput !== '') {
+                currentInput = calculate(firstOperand, operator, currentInput);
+                display.textContent = currentInput; // Show only the result
+                operator = '';
+                firstOperand = '';
+                shouldResetDisplay = true;
+            }
+        } else if (['+', '-', '*', '/'].includes(value)) {
+            if (currentInput !== '') {
+                if (operator && firstOperand !== '') {
+                    firstOperand = calculate(firstOperand, operator, currentInput);
+                    display.textContent = firstOperand + ' ' + value; // Update display with new operator
+                } else {
+                    firstOperand = currentInput;
+                    display.textContent = firstOperand + ' ' + value; // Display current operation
+                }
+                operator = value;
+                currentInput = '';
+            } else {
+                operator = value;
+                display.textContent = firstOperand + ' ' + operator;
+            }
+        } else {
+            if (shouldResetDisplay) {
+                currentInput = value;
+                shouldResetDisplay = false;
+            } else {
+                currentInput += value;
+            }
+            display.textContent = firstOperand + ' ' + operator + ' ' + currentInput; // Display equation
+        }
+    });
+});
+
+function resetCalculator() {
+    currentInput = '';
+    operator = '';
+    firstOperand = '';
+    display.textContent = '0';
+    shouldResetDisplay = false;
+}
+
+function calculate(firstOperand, operator, secondOperand) {
+    if (secondOperand === '') secondOperand = '0';  // Handle empty second operand
+    switch (operator) {
+        case '+':
+            return String(parseFloat(firstOperand) + parseFloat(secondOperand));
+        case '-':
+            return String(parseFloat(firstOperand) - parseFloat(secondOperand));
+        case '*':
+            return String(parseFloat(firstOperand) * parseFloat(secondOperand));
+        case '/':
+            return String(parseFloat(firstOperand) / parseFloat(secondOperand));
+        default:
+            return secondOperand;
+    }
+}
+   </script>
+</body>
+</html>
